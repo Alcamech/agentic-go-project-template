@@ -1,0 +1,41 @@
+# Binaries
+/bin/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Coverage
+coverage.out
+coverage.html
+
+# Go workspace
+go.work
+go.work.sum
+
+# Editor / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Agent tool indexes (local)
+.codegraph/
+
+# Claude Code local overrides (not for the public template)
+.claude/settings.local.json
+
+# Accidental root-level go build output
+/app
+/YOUR_PROJECT
