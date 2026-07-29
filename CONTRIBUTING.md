@@ -7,7 +7,7 @@ Thanks for helping improve this project.
 ```bash
 make hooks           # pre-commit + Conventional Commits commit-msg hook
 make precommit       # local gate before every commit
-make ci              # full CI gate (includes govulncheck + clean tree)
+make ci              # full CI gate (govulncheck + cross-compile smoke + clean tree)
 ```
 
 Optional agent setup (host tools + skill packs):

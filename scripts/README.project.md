@@ -49,7 +49,7 @@ Merge conventional commits → release-please opens a release PR → merge that 
 | Target | What it does |
 |--------|----------------|
 | `make precommit` | mod, generate, spell, lint, test |
-| `make ci` | `precommit` + govulncheck + clean git tree |
+| `make ci` | `precommit` + govulncheck + cross-compile smoke + clean git tree |
 | `make test` | unit tests (`-race` when CGO allows) |
 | `make cover` | tests with coverage summary |
 | `make build` | build `bin/{{BINARY}}` |

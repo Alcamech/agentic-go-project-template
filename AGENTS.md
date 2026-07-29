@@ -12,7 +12,7 @@ Follow [golang-standards/project-layout](https://github.com/golang-standards/pro
 
 ```bash
 make precommit   # local / git-hook gate (mod, gen, spell, lint, test)
-make ci          # precommit + govulncheck + clean tree (matches GitHub Actions)
+make ci          # precommit + govulncheck + crossbuild + clean tree (matches GitHub Actions)
 ```
 
 Do **not** skip hooks or claim success without running these when you changed Go, Markdown, or config files.

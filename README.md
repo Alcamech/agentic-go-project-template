@@ -37,7 +37,7 @@ make build
 | Target | What it does |
 | -------- | ---------------- |
 | `make precommit` | mod, generate, spell, lint, test (git hook / local) |
-| `make ci` | `precommit` + govulncheck + clean git tree |
+| `make ci` | `precommit` + govulncheck + cross-compile smoke + clean git tree |
 | `make build` | `go build -o bin/<binary> ./cmd/<binary>` |
 | `make hooks` | install `pre-commit` + Conventional Commits `commit-msg` hook |
 | `make agent-tools` | install/wire [rtk](https://github.com/rtk-ai/rtk) + [codegraph](https://github.com/colbymchenry/codegraph) + [ast-grep](https://github.com/ast-grep/ast-grep) |
