@@ -43,7 +43,7 @@ make build
 | `make agent-tools` | install/wire [rtk](https://github.com/rtk-ai/rtk) + [codegraph](https://github.com/colbymchenry/codegraph) + [ast-grep](https://github.com/ast-grep/ast-grep) |
 | `make agent-skills` | install [mattpocock/skills](https://github.com/mattpocock/skills) + [obra/superpowers](https://github.com/obra/superpowers) |
 
-Go tools are pinned in `go.mod` (`go tool …`). Agent tools/skills are optional host installs — see [docs/agent-tools.md](./docs/agent-tools.md) and [docs/agent-skills.md](./docs/agent-skills.md).
+Go tools are pinned in `tools/go.mod` (`go tool -modfile=tools/go.mod …`), keeping the main `go.mod` dependency-free. Agent tools/skills are optional host installs — see [docs/agent-tools.md](./docs/agent-tools.md) and [docs/agent-skills.md](./docs/agent-skills.md).
 
 ## Commits and releases
 
@@ -78,6 +78,7 @@ scripts/README.project.md       becomes README.md after init
 docs/agent-tools.md             agent toolchain guide
 docs/agent-skills.md            skill packs + how they coexist
 sgconfig.yml + rules/           optional ast-grep project rules
+tools/go.mod                    pinned Go tools (golangci-lint, govulncheck, misspell)
 Makefile                        quality gates + agent-tools
 .golangci.yml                   golangci-lint v2
 .goreleaser.yml                 release archives (used by CI)

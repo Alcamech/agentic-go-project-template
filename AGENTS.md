@@ -119,7 +119,7 @@ Rules of thumb:
 
 ## Go toolchain (Makefile)
 
-Pinned via `tool` directives in `go.mod` and invoked as `go tool …` from the Makefile:
+Pinned via `tool` directives in `tools/go.mod` (a dedicated module, so the main `go.mod` stays dependency-free) and invoked as `go tool -modfile=tools/go.mod …` from the Makefile:
 
 - golangci-lint v2
 - govulncheck (CI via `make ci` / `make vuln`, not pre-commit)
