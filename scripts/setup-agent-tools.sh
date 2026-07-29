@@ -21,6 +21,13 @@ fi
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
+# `sg` is ast-grep's short alias, but on Linux `sg` is also setgid(1)
+# (a symlink to newgrp). Only trust `sg` when it's really ast-grep.
+have_astgrep() {
+  have ast-grep && return 0
+  have sg && sg --version 2>/dev/null | grep -qi ast-grep
+}
+
 ok()   { printf '  [ok]   %s\n' "$*"; }
 warn() { printf '  [warn] %s\n' "$*"; }
 info() { printf '  [..]   %s\n' "$*"; }
@@ -100,7 +107,7 @@ wire_codegraph() {
 }
 
 install_ast_grep() {
-  if have ast-grep || have sg; then
+  if have_astgrep; then
     local bin=ast-grep
     have ast-grep || bin=sg
     ok "$bin $($bin --version 2>/dev/null | head -n1 || echo present)"
@@ -119,7 +126,7 @@ install_ast_grep() {
     warn "install ast-grep manually: https://ast-grep.github.io/guide/quick-start.html"
     return 1
   fi
-  have ast-grep || have sg || { warn "ast-grep not on PATH after install"; return 1; }
+  have_astgrep || { warn "ast-grep not on PATH after install"; return 1; }
   ok "ast-grep installed"
 }
 
