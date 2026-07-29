@@ -57,6 +57,16 @@ linters:
     generated: lax
     presets:
       - std-error-handling
+    rules:
+      # Table-driven tests legitimately trip length, duplication, and
+      # magic-number linters; keep them focused on production code.
+      - path: _test\.go
+        linters:
+          - dupl
+          - funlen
+          - goconst
+          - gocyclo
+          - mnd
 formatters:
   enable:
     - gofumpt
