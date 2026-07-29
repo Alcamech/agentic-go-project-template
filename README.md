@@ -58,9 +58,11 @@ Flow:
 1. Land Conventional Commits on `main` / `master`
 2. [release-please](https://github.com/googleapis/release-please) opens or updates a release PR (changelog + `.release-please-manifest.json`)
 3. Merge the release PR → SemVer tag + GitHub Release
-4. Release workflow attaches cross-compiled binaries
+4. [GoReleaser](https://goreleaser.com) builds archives/checksums and attaches them to that release
 
-Config: `release-please-config.json`, `.release-please-manifest.json`, `.github/workflows/release-please.yml`.
+Config: `release-please-config.json`, `.release-please-manifest.json`, `.goreleaser.yml`, `.github/workflows/release-please.yml`.
+
+Local dry-run: `make release-snapshot`.
 
 ## Layout
 
@@ -73,16 +75,16 @@ scripts/init.sh                 bootstrap
 scripts/setup-agent-tools.sh    rtk + codegraph + ast-grep
 scripts/setup-agent-skills.sh   mattpocock/skills + obra/superpowers
 scripts/README.project.md       becomes README.md after init
-scripts/build-release-binaries.sh
 docs/agent-tools.md             agent toolchain guide
 docs/agent-skills.md            skill packs + how they coexist
 sgconfig.yml + rules/           optional ast-grep project rules
 Makefile                        quality gates + agent-tools
 .golangci.yml                   golangci-lint v2
+.goreleaser.yml                 release archives (used by CI)
 .pre-commit-config.yaml         make precommit + conventional commit-msg
 .github/workflows/ci.yml        make ci
 .github/workflows/release-please.yml
-.github/workflows/release.yml   binaries for manually pushed v* tags
+.github/workflows/release.yml   GoReleaser for manually pushed v* tags
 .github/dependabot.yml          weekly Go + Actions updates
 release-please-config.json
 .release-please-manifest.json

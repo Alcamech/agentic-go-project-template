@@ -42,7 +42,7 @@ Follows [golang-standards/project-layout](https://github.com/golang-standards/pr
 - Versions: [Semantic Versioning](https://semver.org/)
 - Automation: [release-please](https://github.com/googleapis/release-please) on pushes to `main` / `master`
 
-Merge conventional commits → release-please opens a release PR → merge that PR to tag and publish. Binaries are attached automatically.
+Merge conventional commits → release-please opens a release PR → merge that PR to tag and publish. [GoReleaser](https://goreleaser.com) attaches archives and checksums (see `.goreleaser.yml`). Local dry-run: `make release-snapshot`.
 
 ## Commands
 

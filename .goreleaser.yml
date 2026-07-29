@@ -1,0 +1,42 @@
+# https://goreleaser.com
+# Versions/changelog come from release-please; GoReleaser builds and attaches artifacts.
+version: 2
+
+builds:
+  - id: default
+    main: ./cmd/app
+    binary: "{{ .ProjectName }}"
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    ldflags:
+      - -s -w
+
+archives:
+  - formats:
+      - tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  # release-please owns CHANGELOG.md / release notes
+  disable: true
+
+release:
+  # release-please creates the GitHub Release first; attach assets to it
+  mode: keep-existing

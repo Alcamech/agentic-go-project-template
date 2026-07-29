@@ -24,6 +24,7 @@ See [docs/agent-tools.md](./docs/agent-tools.md) and [docs/agent-skills.md](./do
 
 - Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) (`feat:`, `fix:`, `chore:`, …)
 - Versions follow [SemVer](https://semver.org/) via [release-please](https://github.com/googleapis/release-please)
+- Release artifacts are built with [GoReleaser](https://goreleaser.com) (`.goreleaser.yml`)
 - Open PRs against `main` / `master`; CI must pass (`make ci`)
 
 ## Agent and process contract

@@ -63,6 +63,10 @@ build: ## build binary into ./bin
 	mkdir -p bin
 	go build -o $(OUT) ./cmd/$(BINARY)
 
+.PHONY: release-snapshot
+release-snapshot: ## local GoReleaser snapshot (no publish)
+	go run github.com/goreleaser/goreleaser/v2@v2.9.0 release --snapshot --clean
+
 .PHONY: hooks
 hooks: ## install pre-commit + commit-msg hooks
 	pre-commit install --hook-types pre-commit --hook-types commit-msg

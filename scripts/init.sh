@@ -57,6 +57,9 @@ if [[ "$BINARY" != "$OLD_BINARY" ]]; then
     rmdir "cmd/$OLD_BINARY" 2>/dev/null || true
   fi
   sedi "s|^BINARY  ?= ${OLD_BINARY}\$|BINARY  ?= ${BINARY}|" Makefile
+  if [[ -f .goreleaser.yml ]]; then
+    sedi "s|main: ./cmd/${OLD_BINARY}|main: ./cmd/${BINARY}|g" .goreleaser.yml
+  fi
 fi
 
 # Rewrite module / project placeholders (never rewrite this script)

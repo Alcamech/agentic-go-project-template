@@ -1,6 +1,6 @@
-name: release-binaries
+name: release
 
-# Manual / human-created tags (release-please attaches binaries in its own workflow).
+# Manual / human-created tags (release-please runs GoReleaser in its own workflow).
 on:
   push:
     tags:
@@ -10,21 +10,22 @@ permissions:
   contents: write
 
 jobs:
-  binaries:
+  goreleaser:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
           cache: true
 
-      - name: Build release binaries
-        run: ./scripts/build-release-binaries.sh
-
-      - name: Upload binaries to GitHub Release
-        uses: softprops/action-gh-release@v3
+      - uses: goreleaser/goreleaser-action@v6
         with:
-          files: dist/*
-          fail_on_unmatched_files: true
+          distribution: goreleaser
+          version: "~> v2"
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
