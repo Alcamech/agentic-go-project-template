@@ -70,9 +70,10 @@ If this tree still uses the `github.com/OWNER/REPO` placeholder:
 
 ```bash
 ./scripts/init.sh github.com/you/your-module [binary-name]
+# host tooling is opt-in: --with-agent-tools --with-agent-skills
 ```
 
-That rewrites the module path, renames `cmd/app` when needed, installs a project README, runs `go mod tidy`, and installs pre-commit when available. No manual find/replace afterward.
+That rewrites the module path, renames `cmd/app` when needed, installs a project README, resets the release-please manifest and changelog, runs `go mod tidy`, and installs pre-commit when available. No manual find/replace afterward.
 
 ## Agent skills (mattpocock + superpowers)
 

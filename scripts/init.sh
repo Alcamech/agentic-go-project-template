@@ -3,6 +3,10 @@
 # Usage:
 #   ./scripts/init.sh github.com/you/myapp
 #   ./scripts/init.sh github.com/you/myapp myapp
+#   ./scripts/init.sh github.com/you/myapp --with-agent-tools --with-agent-skills
+#
+# Host-mutating installs (rtk/codegraph/ast-grep, skill packs) run only
+# with the explicit --with-agent-tools / --with-agent-skills flags.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -15,14 +19,25 @@ else
   sedi() { sed -i '' "$@"; }
 fi
 
-if [[ $# -lt 1 ]]; then
-  echo "usage: $0 <module-path> [binary-name]" >&2
+WITH_AGENT_TOOLS=0
+WITH_AGENT_SKILLS=0
+POSITIONAL=()
+for arg in "$@"; do
+  case "$arg" in
+    --with-agent-tools) WITH_AGENT_TOOLS=1 ;;
+    --with-agent-skills) WITH_AGENT_SKILLS=1 ;;
+    *) POSITIONAL+=("$arg") ;;
+  esac
+done
+
+if [[ ${#POSITIONAL[@]} -lt 1 ]]; then
+  echo "usage: $0 <module-path> [binary-name] [--with-agent-tools] [--with-agent-skills]" >&2
   echo "  example: $0 github.com/you/myapp" >&2
   exit 1
 fi
 
-MODULE="$1"
-BINARY="${2:-$(basename "$MODULE")}"
+MODULE="${POSITIONAL[0]}"
+BINARY="${POSITIONAL[1]:-$(basename "$MODULE")}"
 OLD_MODULE="github.com/OWNER/REPO"
 OLD_BINARY="app"
 PROJECT_NAME="$(basename "$MODULE")"
@@ -90,6 +105,22 @@ if [[ -f scripts/README.project.md ]]; then
   rm -f scripts/README.project.md
 fi
 
+# Start the new project's release history at zero (don't inherit the
+# template's version or changelog).
+printf '{\n  ".": "0.0.0"\n}\n' > .release-please-manifest.json
+cat > CHANGELOG.md <<'EOF'
+# Changelog
+
+All notable changes to this project are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+Versions and notes are produced automatically by
+[release-please](https://github.com/googleapis/release-please) from
+[Conventional Commits](https://www.conventionalcommits.org/).
+EOF
+
 go mod tidy
 
 if [[ ! -d .git ]]; then
@@ -108,33 +139,31 @@ cat <<EOF
 
 Ready — no further find/replace needed.
   make precommit   # local/hook gate (mod, gen, spell, lint, test)
-  make ci          # precommit + govulncheck + clean tree
+  make ci          # precommit + govulncheck + crossbuild + clean tree
   make build       # → bin/${BINARY}
 
-Agent host tools (rtk + codegraph + ast-grep):
-  make agent-tools           # install/wire (once per machine/project)
+Agent host tools (rtk + codegraph + ast-grep) — opt-in:
+  make agent-tools           # or rerun init.sh with --with-agent-tools
   make agent-tools-check
   docs/agent-tools.md
 
-Agent skills (mattpocock/skills + obra/superpowers):
-  make agent-skills          # global via npx skills
+Agent skills (mattpocock/skills + obra/superpowers) — opt-in:
+  make agent-skills          # or rerun init.sh with --with-agent-skills
   # then in agent chat: /setup-matt-pocock-skills
   docs/agent-skills.md
 
 EOF
 
-if [[ "${SKIP_AGENT_TOOLS:-}" != "1" ]]; then
-  if [[ -x ./scripts/setup-agent-tools.sh ]]; then
-    echo "Running agent-tools setup (set SKIP_AGENT_TOOLS=1 to skip)..."
-    ./scripts/setup-agent-tools.sh || echo "agent-tools setup had warnings; see docs/agent-tools.md"
-  fi
+if [[ "$WITH_AGENT_TOOLS" == "1" ]]; then
+  echo "Running agent-tools setup (--with-agent-tools)..."
+  ./scripts/setup-agent-tools.sh || echo "agent-tools setup had warnings; see docs/agent-tools.md"
 fi
 
-if [[ "${SKIP_AGENT_SKILLS:-}" != "1" ]]; then
-  if [[ -x ./scripts/setup-agent-skills.sh ]] && command -v npx >/dev/null 2>&1; then
-    echo "Running agent-skills setup (set SKIP_AGENT_SKILLS=1 to skip)..."
+if [[ "$WITH_AGENT_SKILLS" == "1" ]]; then
+  if command -v npx >/dev/null 2>&1; then
+    echo "Running agent-skills setup (--with-agent-skills)..."
     ./scripts/setup-agent-skills.sh --global || echo "agent-skills setup had warnings; see docs/agent-skills.md"
   else
-    echo "Skip agent-skills auto-install (npx missing or script missing). Later: make agent-skills"
+    echo "npx not found; install Node.js, then: make agent-skills"
   fi
 fi

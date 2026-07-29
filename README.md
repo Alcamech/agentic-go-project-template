@@ -30,7 +30,10 @@ make build
 2. Renames `cmd/app` to match the binary name when needed
 3. Rewrites imports, lint local-prefixes, and agent docs
 4. Replaces this README with a project README
-5. Runs `go mod tidy`, initializes git if needed, installs pre-commit hooks when available
+5. Resets the release-please manifest and `CHANGELOG.md` to start at `0.0.0`
+6. Runs `go mod tidy`, initializes git if needed, installs pre-commit hooks when available
+
+Host-mutating agent tooling (rtk/codegraph/ast-grep, skill packs) installs only with explicit `--with-agent-tools` / `--with-agent-skills` flags.
 
 ## After init
 

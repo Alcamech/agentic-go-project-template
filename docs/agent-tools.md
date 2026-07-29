@@ -28,7 +28,7 @@ make agent-tools-check
 
 Then **restart** your agent (Cursor, Claude Code, …) so hooks/MCP reload.
 
-`scripts/init.sh` reminds you to run this after bootstrap. Set `SKIP_AGENT_TOOLS=1` if you want silence.
+`scripts/init.sh` only installs these when run with `--with-agent-tools`; otherwise it just prints a reminder.
 
 ## When to use which
 
