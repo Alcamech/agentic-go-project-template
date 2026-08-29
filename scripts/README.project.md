@@ -26,7 +26,7 @@ make agent-tools-check
 Agent skills (optional, recommended):
 
 ```bash
-make agent-skills        # mattpocock/skills + obra/superpowers
+make agent-skills        # mattpocock/skills
 # then in agent chat: /setup-matt-pocock-skills
 ```
 

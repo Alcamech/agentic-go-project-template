@@ -33,7 +33,7 @@ make build
 5. Resets the release-please manifest and `CHANGELOG.md` to start at `0.0.0`
 6. Runs `go mod tidy`, initializes git if needed, installs pre-commit hooks when available
 
-Host-mutating agent tooling (rtk/codegraph/ast-grep, skill packs) installs only with explicit `--with-agent-tools` / `--with-agent-skills` flags.
+Host-mutating agent tooling (rtk/codegraph/ast-grep, skill pack) installs only with explicit `--with-agent-tools` / `--with-agent-skills` flags.
 
 ## After init
 
@@ -44,7 +44,7 @@ Host-mutating agent tooling (rtk/codegraph/ast-grep, skill packs) installs only 
 | `make build` | `go build -o bin/<binary> ./cmd/<binary>` |
 | `make hooks` | install `pre-commit` + Conventional Commits `commit-msg` hook |
 | `make agent-tools` | install/wire [rtk](https://github.com/rtk-ai/rtk) + [codegraph](https://github.com/colbymchenry/codegraph) + [ast-grep](https://github.com/ast-grep/ast-grep) |
-| `make agent-skills` | install [mattpocock/skills](https://github.com/mattpocock/skills) + [obra/superpowers](https://github.com/obra/superpowers) |
+| `make agent-skills` | install [mattpocock/skills](https://github.com/mattpocock/skills) |
 
 Go tools are pinned in `tools/go.mod` (`go tool -modfile=tools/go.mod …`), keeping the main `go.mod` dependency-free. Agent tools/skills are optional host installs — see [docs/agent-tools.md](./docs/agent-tools.md) and [docs/agent-skills.md](./docs/agent-skills.md).
 
@@ -76,10 +76,10 @@ Template extras:
 ```text
 scripts/init.sh                 bootstrap
 scripts/setup-agent-tools.sh    rtk + codegraph + ast-grep
-scripts/setup-agent-skills.sh   mattpocock/skills + obra/superpowers
+scripts/setup-agent-skills.sh   mattpocock/skills
 scripts/README.project.md       becomes README.md after init
 docs/agent-tools.md             agent toolchain guide
-docs/agent-skills.md            skill packs + how they coexist
+docs/agent-skills.md            mattpocock/skills setup
 sgconfig.yml + rules/           optional ast-grep project rules
 tools/go.mod                    pinned Go tools (golangci-lint, govulncheck, misspell)
 Makefile                        quality gates + agent-tools

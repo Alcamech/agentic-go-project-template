@@ -1,11 +1,6 @@
 # Agent skills
 
-This template recommends two skill packs for an agentic SDLC:
-
-| Pack | Repo | Role |
-|------|------|------|
-| **Skills for Real Engineers** | [mattpocock/skills](https://github.com/mattpocock/skills) | Small, composable skills: grill for alignment, domain docs, TDD, diagnose, architecture |
-| **Superpowers** | [obra/superpowers](https://github.com/obra/superpowers) | End-to-end methodology: brainstorm → plan → TDD → review → finish branch |
+This template recommends [mattpocock/skills](https://github.com/mattpocock/skills) (Skills for Real Engineers) for an agentic SDLC: grill for alignment, domain docs, TDD, diagnose, architecture.
 
 They install into your **coding agent** (Cursor, Claude Code, Codex, …), not into `go.mod`.
 
@@ -36,15 +31,9 @@ In the agent chat, run:
 
 That configures issue tracker, triage labels, and where docs (`CONTEXT.md`, ADRs) live — other Matt Pocock engineering skills read that config.
 
-### Marketplace alternatives
+### Marketplace alternative
 
-If you prefer agent-native plugins instead of (or in addition to) `npx skills`:
-
-**Cursor**
-
-```text
-/add-plugin superpowers
-```
+If you prefer an agent-native plugin instead of (or in addition to) `npx skills`:
 
 **Claude Code**
 
@@ -52,23 +41,21 @@ If you prefer agent-native plugins instead of (or in addition to) `npx skills`:
 claude plugins install mattpocock-skills
 # or in-session:
 # /plugin install mattpocock-skills
-# /plugin install superpowers@claude-plugins-official
 ```
 
-Matt’s README warns: **plugin + skills.sh copy of the same pack = duplicated skills**. Pick one install path per pack.
+Matt’s README warns: **plugin + skills.sh copy of the same pack = duplicated skills**. Pick one install path.
 
-## How they work together
+## When to use which
 
 | Phase | Prefer |
 |-------|--------|
-| Align on *what* to build | Matt: `/grill-me` or `/grill-with-docs` (builds shared language / ADRs) |
-| Default delivery loop | Superpowers (brainstorm → plan → subagent/TDD → review → finish) |
-| Explicit red-green loop | Either Superpowers `test-driven-development` or Matt `/tdd` — don’t run both on the same change |
-| Hard bug | Matt `/diagnose` / `diagnosing-bugs`, or Superpowers `systematic-debugging` |
-| Rescue messy design | Matt `/improve-codebase-architecture` |
+| Align on *what* to build | `/grill-me` or `/grill-with-docs` (builds shared language / ADRs) |
+| Explicit red-green loop | `/tdd` |
+| Hard bug | `/diagnose` / `diagnosing-bugs` |
+| Rescue messy design | `/improve-codebase-architecture` |
 | Navigate code cheaply | Host tools: codegraph + rtk + ast-grep ([agent-tools.md](./agent-tools.md)) |
 
-Superpowers **auto-triggers** many workflows. Matt’s **user-invoked** skills (`/grill-me`, `/to-spec`, …) are for when you want a specific ritual. Use Matt’s grilling before large Superpowers implementation runs.
+Use grilling before large implementation runs.
 
 ## Project artifacts these skills may create
 

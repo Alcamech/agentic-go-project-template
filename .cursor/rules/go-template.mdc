@@ -14,7 +14,7 @@ Read and follow [AGENTS.md](../../AGENTS.md) for this repository.
 - Run `make precommit` before claiming work is complete; use `make ci` when matching GitHub Actions (adds vuln + clean tree).
 - Do not skip pre-commit hooks or disable linters to pass checks.
 - Commit with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/); versions follow [SemVer](https://semver.org/) via [release-please](https://github.com/googleapis/release-please).
-- Skills: [mattpocock/skills](https://github.com/mattpocock/skills) + [obra/superpowers](https://github.com/obra/superpowers). Grill before big work; Superpowers for delivery loop. See [docs/agent-skills.md](../../docs/agent-skills.md).
+- Skills: [mattpocock/skills](https://github.com/mattpocock/skills). Grill before big work. See [docs/agent-skills.md](../../docs/agent-skills.md).
 - Prefer **codegraph** MCP for navigation, **rtk** for noisy shell/test output, **ast-grep** for structural find/rewrite. See [docs/agent-tools.md](../../docs/agent-tools.md).
 - New behavior requires table-driven tests where practical.
 - If the module path is still `github.com/OWNER/REPO`, run `./scripts/init.sh <module> [binary]` once.

@@ -75,7 +75,7 @@ If this tree still uses the `github.com/OWNER/REPO` placeholder:
 
 That rewrites the module path, renames `cmd/app` when needed, installs a project README, resets the release-please manifest and changelog, runs `go mod tidy`, and installs pre-commit when available. No manual find/replace afterward.
 
-## Agent skills (mattpocock + superpowers)
+## Agent skills (mattpocock)
 
 Setup once:
 
@@ -89,11 +89,10 @@ Details: [docs/agent-skills.md](./docs/agent-skills.md).
 
 | Need | Prefer |
 |------|--------|
-| Align before building | Matt `/grill-me` or `/grill-with-docs` |
-| Default plan → implement → review loop | **Superpowers** (auto-triggers) |
-| Explicit TDD on a slice | Superpowers TDD **or** Matt `/tdd` (not both at once) |
-| Hard bug | Matt diagnose **or** Superpowers systematic-debugging |
-| Architecture deepening | Matt `/improve-codebase-architecture` |
+| Align before building | `/grill-me` or `/grill-with-docs` |
+| Explicit TDD on a slice | `/tdd` |
+| Hard bug | `/diagnose` / `diagnosing-bugs` |
+| Architecture deepening | `/improve-codebase-architecture` |
 
 Do not skip grilling on ambiguous work. Do not claim done without `make precommit`.
 

@@ -10,7 +10,7 @@ make precommit       # local gate before every commit
 make ci              # full CI gate (govulncheck + cross-compile smoke + clean tree)
 ```
 
-Optional agent setup (host tools + skill packs):
+Optional agent setup (host tools + skill pack):
 
 ```bash
 make agent-tools

@@ -5,7 +5,7 @@
 #   ./scripts/init.sh github.com/you/myapp myapp
 #   ./scripts/init.sh github.com/you/myapp --with-agent-tools --with-agent-skills
 #
-# Host-mutating installs (rtk/codegraph/ast-grep, skill packs) run only
+# Host-mutating installs (rtk/codegraph/ast-grep, skill pack) run only
 # with the explicit --with-agent-tools / --with-agent-skills flags.
 set -euo pipefail
 
@@ -147,7 +147,7 @@ Agent host tools (rtk + codegraph + ast-grep) — opt-in:
   make agent-tools-check
   docs/agent-tools.md
 
-Agent skills (mattpocock/skills + obra/superpowers) — opt-in:
+Agent skills (mattpocock/skills) — opt-in:
   make agent-skills          # or rerun init.sh with --with-agent-skills
   # then in agent chat: /setup-matt-pocock-skills
   docs/agent-skills.md

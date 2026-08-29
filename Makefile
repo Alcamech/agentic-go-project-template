@@ -93,11 +93,11 @@ agent-tools-check: ## show rtk / codegraph / ast-grep status
 	./scripts/setup-agent-tools.sh --check
 
 .PHONY: agent-skills
-agent-skills: ## install mattpocock/skills + obra/superpowers (global)
+agent-skills: ## install mattpocock/skills (global)
 	./scripts/setup-agent-skills.sh --global
 
 .PHONY: agent-skills-project
-agent-skills-project: ## install skill packs into this repo
+agent-skills-project: ## install mattpocock/skills into this repo
 	./scripts/setup-agent-skills.sh --project
 
 .PHONY: agent-skills-check

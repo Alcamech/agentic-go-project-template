@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Install agent skill packs used by this template:
+# Install the agent skill pack used by this template:
 #   https://github.com/mattpocock/skills
-#   https://github.com/obra/superpowers
 #
 # Usage:
 #   ./scripts/setup-agent-skills.sh           # global install (default)
@@ -23,7 +22,7 @@ for arg in "$@"; do
     --global) SCOPE="-g" ;;
     --check) CHECK_ONLY=1 ;;
     -h|--help)
-      sed -n '2,12p' "$0" | tr -d '#'
+      sed -n '2,11p' "$0" | tr -d '#'
       exit 0
       ;;
     *)
@@ -60,10 +59,6 @@ info "mattpocock/skills"
 # shellcheck disable=SC2086
 npx -y skills@latest add mattpocock/skills --all ${SCOPE} -y
 
-info "obra/superpowers"
-# shellcheck disable=SC2086
-npx -y skills@latest add obra/superpowers --all ${SCOPE} -y
-
 cat <<EOF
 
 Skills installed via skills.sh.
@@ -71,12 +66,9 @@ Skills installed via skills.sh.
 Required once per repo (in your agent chat):
   /setup-matt-pocock-skills
 
-Cursor alternative for Superpowers (marketplace plugin):
-  /add-plugin superpowers
-
-Claude Code alternatives:
+Claude Code alternative:
   claude plugins install mattpocock-skills
-  /plugin install superpowers@claude-plugins-official
+  # or in-session: /plugin install mattpocock-skills
 
 Details: docs/agent-skills.md
 Update later: npx skills update
